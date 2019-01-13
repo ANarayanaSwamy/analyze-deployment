@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-console-deployment
+  labels:
+    app: my-console
+spec:
+  selector:
+    matchLabels: 
+      app: my-console
+  template:
+    metadata:
+      labels:
+        app: my-console
+    spec:
+      containers:
+        - name: my-console
+          image: narayanaswamy/console
+          volumeMounts:
+            - mountPath: /userUploads
+              name: user-uploads
+            - mountPath: /app-logs
+              name: app-logs
+          ports:
+          - containerPort: 8080
+          env:
+            - name: user_storage_path
+              value: /userUploads
+            - name: spring_kafka_bootstrap-servers
+              value: localhost:9092
+            - name: LOG_FILE
+              value: /app-logs/console.log
+      volumes:
+        - name: user-uploads
+          hostPath:
+            # directory location on host
+            path: /minikube-host
+            # this field is optional
+            type: Directory
+        - name: app-logs
+          hostPath:
+            # directory location on host
+            path: /minikube-host/app-logs
+            # this field is optional
+            type: Directory
