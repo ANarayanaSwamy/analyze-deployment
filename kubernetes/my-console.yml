@@ -32,16 +32,18 @@ spec:
               value: /app-logs/console.log
       volumes:
         - name: user-uploads
-          persistentVolumeClaim:
-            claimName: my-console-pv-claim
+          emptyDir: {}
+          #persistentVolumeClaim:
+          #  claimName: my-console-pv-claim
           #hostPath:
           #  # directory location on host
           #  path: /minikube-host
           #  # this field is optional
           #  type: Directory
         - name: app-logs
-          persistentVolumeClaim:
-            claimName: my-console-pv-claim
+          emptyDir: {}
+          #persistentVolumeClaim:
+          #  claimName: my-console-pv-claim
           #hostPath:
           #  # directory location on host
           #  path: /minikube-host/app-logs
