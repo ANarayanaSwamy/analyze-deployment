@@ -13,13 +13,11 @@ spec:
       labels:
         app: kafka-broker
     spec:
-      initContainers:
-        - name: init-kafka-broker
-          image: busybox
-          command: ['sh','-c','echo Waiting for Zookeeper Host']
       containers:
-        - name: my-test
-          image: busybox
+        - name: zookeeper
+          image: wurstmeister/zookeeper
+          ports:
+            - containerPort: 2181
         - name: kafka-broker
           image: wurstmeister/kafka
           ports:
