@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,3 +50,22 @@ spec:
           #  path: /minikube-host/app-logs
           #  # this field is optional
           #  type: Directory
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-console-service
+  labels:
+    app: my-console-service
+spec:
+  type: LoadBalancer
+  selector:
+      app: my-console
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+
