@@ -28,7 +28,9 @@ spec:
             - name: user_storage_path
               value: /userUploads
             - name: spring_kafka_bootstrap-servers
-              value: localhost:9092
+              value: message-system-service.default.svc.cluster.local:9092
+            - name: publish_message_after_upload
+              value: "true"            
             - name: LOG_FILE
               value: /app-logs/console.log
       volumes:
